@@ -1,0 +1,218 @@
+
+/*
+label {
+    clear: both;
+    width: 100%;
+    text-align: left;
+    display: inline-block;
+}
+    */
+.logo {
+    background: url(../images/icon_fish.png) -30px -10px no-repeat;
+    width: 160px;
+    height: 40px;
+    text-indent: -999px;
+    margin: 0;
+}
+
+#spotForm, #searchForm {
+    input {
+        display: inline-block;
+        margin: 5px 0;
+        width: 200px;
+    }
+
+    button {
+        margin: 4px 0;
+    }
+}
+
+#imageCapture {
+    margin-left: 0.5em;
+
+    & > * {
+        display: inline-block;
+        float: left;
+        width: auto;
+    }
+
+    p {
+        font-size: 0.7em;
+        width: 10em;
+        text-align: center;
+        margin: 30px 0 0;
+    }
+}
+
+#imagePreview {
+    background: url("../images/icon_fish.png") no-repeat -279px 0 #FFFFFF;
+    height: 70px;
+    overflow: hidden;
+    padding-top: 10px;
+    position: relative;
+    width: 120px;
+
+    img {
+        width: 120px;
+        height: 80px
+    }
+
+    span {
+        &.deleteImage {
+            position: absolute;
+            top: 10px;
+            right: 0;
+            border: 1px solid #CCCCCC;
+            color: #CCCCCC;
+            text-align: center;
+            border-radius: 2px;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.header {
+    line-height: 36px;
+    font-weight: bold;
+    font-size: 1em;
+    display: inline-block;
+    font-size: 1em;
+    width: 100%;
+    margin: 0 0 0 6px;
+}
+
+.content {
+    background: #fff;
+    display: none;
+}
+
+#searchResults {
+    display: none;
+}
+
+#searchResults, #mySpots {
+    height: auto;
+
+
+
+
+    .cloudFlag {
+        display: none;
+    }
+
+    [data-iscloud=true] {
+        span.cloudFlag {
+            background: none repeat scroll 0 0 #002893;
+            border: 2px solid #52AFD4;
+            border-radius: 5px 5px 5px 5px;
+            color: #FFFFFF;
+            display: inline-block !important;
+            /*float: right;*/
+            font-weight: bold;
+            height: 20px;
+            line-height: 20px;
+            margin: -1px;
+            text-align: center;
+            width: 20px;
+        }
+    }
+
+    .tmb {
+        border: none;
+        width: 72px;
+        height: 72px;
+        float: left;
+        display: inline-block;
+        margin: 0 8px;
+        background: url(../images/icon_fish.png) no-repeat -5px -90px;
+    }
+
+    p {
+        padding-left: 7px;
+        min-height: 38px;
+        margin: 0;
+        width: 80%;
+        font-size: 0.9em
+    }
+
+    a {
+        margin-left: 6px;
+        display: inline-block;
+        border: 1px solid #B9B9B9;
+        width: 25px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #000;
+        margin: 0 3px 0 0;
+        text-decoration: none;
+    }
+
+    ul {
+        width: 100% !important;
+        padding: 0;
+
+        li {
+            background-color: #eee;
+            min-height: 80px;
+            padding: 5px 0;
+
+            &:last-child {
+                border: none;
+            }
+        }
+
+        .spotList {
+            border: 0;
+            border-bottom: dotted 1px #999;
+        }
+    }
+}
+
+
+section {
+
+    form {
+        padding: 5px;
+        clear: both;
+
+        textarea {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            min-width: 100%;
+            max-width: 100%;
+            height: 40px;
+        }
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+
+
+        > li {
+            border-top: solid 1px #999;
+            border-bottom: solid 1px #333;
+            background-color: #666;
+            height: 30px;
+            color: #fff;
+            list-style-type: none;
+            padding: 0 1px;
+        }
+
+        li {
+            border-top: solid 1px #ededed;
+            border-bottom: solid 1px #999;
+            color: #333;
+            height: auto;
+            background-color: #B9B9B9;
+        }
+
+            li a {
+                &:first-child {
+                    text-indent: 5px;
+                }
+            }
+    }
+}

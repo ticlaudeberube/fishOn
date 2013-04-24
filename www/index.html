@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<!--
+       Licensed to the Apache Software Foundation (ASF) under one
+       or more contributor license agreements.  See the NOTICE file
+       distributed with this work for additional information
+       regarding copyright ownership.  The ASF licenses this file
+       to you under the Apache License, Version 2.0 (the
+       "License"); you may not use this file except in compliance
+       with the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+       Unless required by applicable law or agreed to in writing,
+       software distributed under the License is distributed on an
+       "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+       KIND, either express or implied.  See the License for the
+       specific language governing permissions and limitations
+       under the License.
+-->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <title>FishOn - for fellow sporting hanglers</title>
+
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/fo.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.3.1.min.css" />
+
+    <script src="js/lib/jquery-1.9.1.min.js"></script>
+   <!-- <script src="http://localhost:8080/target/target-script-min.js#8315d53e-8a85-11e2-8bf0-12313d1744da"></script> -->
+</head>
+<body>
+    <section class="app">
+        <div data-role="page" id="index" role="main">
+            <div data-role="content">
+                <header>
+                    <h1 class="logo">Fish On</h1>
+                    <!--<div id="deviceready" class="blink">
+                        <p class="event listening">Connecting to Device</p>
+                        <p class="event received">Device is Ready</p>
+                    </div>-->
+                </header>
+                <ul class="collapsible">
+                    <li>
+                        <p class="header">Grab a Spot</p>
+                        <div class="content">
+                            <div id="imageCapture">
+                                <div id="imagePreview"></div>
+                                <p class="instruction" data-mobile="Click camera and save picture and its geolocation into My Spots" data-web="Upload a file and save picture and geolocation into My Spots"></p>
+                            </div>
+                            <form id="spotForm" method="get">
+                                <label for="location" class="ui-hidden-accessible">Insert Location:</label>
+                                <input data-mini="true" placeholder="Insert spot location" type="text" name="location" id="location">
+                                <label for="commentlocation" class="ui-hidden-accessible">Insert Comment:</label>
+                                <textarea cols="40" rows="8" placeholder="Insert comment" name="comment" id="comment"></textarea>
+
+                                <input type="hidden" name="uuid" id="uuid" value="">
+                                <input type="hidden" name="lat" id="lat" value="">
+                                <input type="hidden" name="lng" id="lng" value="">
+                                <input type="hidden" name="date" id="date" value="">
+                                <input type="hidden" name="user" id="user" value="">
+                                <button data-inline="true" data-icon="search" data-mini="true" id="saveSpot">Save to My Spots</button>
+                                <button data-inline="true" data-icon="refresh" data-mini="true" type="reset" id="clear">Clear</button>
+                            </form>
+
+                        </div>
+                    </li>
+                    <li>
+                        <p class="header">Search Spots</p>
+                        <div class="content">
+                            <form id="searchForm" method="get">
+                                <label for="SearchLocation" class="ui-hidden-accessible">Enter Search Location:</label>
+                                <input data-mini="true" placeholder="Search by location" type="search" name="SearchLocation" id="searchLocation" value="Montreal">
+                                <button type="reset" data-inline="true" data-icon="search" data-theme="c" data-mini="true" id="searchButton">Search</button>
+                            </form>
+
+                            <div id="searchResults">
+                                <ul id="spotList" class="spotList">
+                                    <li>
+                                        <p>List is empty</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="header">My Spots</p>
+                        <div class="content">
+                            <div id="mySpots">
+                                <ul id="mySpotsList" class="spotList">
+                                    <li>
+                                        <p>No content</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="disabled">
+                        <p class="header">Spot Finder</p>
+                        <div class="content"></div>
+                    </li>
+                    <li class="disabled">
+                        <p class="header">Install apps</p>
+                        <div class="content">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <!--<div data-role="footer"><h4>Footer</h4></div>-->
+        <div data-role="dialog" data-overlay-theme="b" data-theme="b" data-transition="slide" id="edit">
+            <div data-role="header">
+                <h4>Edit Spot</h4>
+            </div>
+            <div data-role="content">
+                <label>Edit Location</label>
+                <input placeholder="Insert spot location" type="text" name="editLocation" id="editLocation">
+                <label>Edit Comment</label>
+                <textarea placeholder="Insert comment" name="comment" id="editComment"></textarea>
+                <input type="hidden" id="edituuid" name="edituuid">
+                <button data-inline="true" data-icon="save" data-theme="c" data-mini="true">Save Changes</button>
+                <button data-inline="true" data-icon="back" data-theme="c" data-mini="true">Cancel</button>
+            </div>
+            <div data-role="footer"></div>
+        </div>
+    </section>
+    <script src="cordova-2.5.0.js"></script>
+    <script src="http://fishingspots.azure-mobile.net/client/MobileServices.Web-1.0.0.min.js"></script>
+    <script src="js/lib/ydn.db-jquery-0.4.7.js"></script>
+    <script src="js/lib/Math.uuid.js"></script>
+    <script src="js/fo.js"></script>
+    <script src="js/tmpl.js"></script>
+    <script src="js/fo.device.camera.js"></script>
+    <script>
+        (function ($, fo) {
+            var dd = $.Deferred();
+            var jqd = $.Deferred();
+
+            document.addEventListener("deviceReady", resolve, false);
+            function resolve() {
+                dd.resolve();
+            };
+            $(document).one('mobileinit', function () {
+                jqd.resolve();
+            });
+            // comment out dd in order to use solutions in browser as deviceReady event is not used in browser environment
+            $.when(dd, jqd).done(function () {
+                var isDevice = true;
+                // manage file upload and message for web browser
+                if (!navigator.camera) {
+                    isDevice = false;
+                    var input = fo.tmpl.fileInputLabel + fo.tmpl.fileInput;
+                    $("#spotForm").prepend(input);
+                }
+                //manage image preview text
+                var inst = $("#imageCapture").find('p');
+                var txt = "";
+                (isDevice) ? txt = inst.attr("data-mobile") : txt = inst.attr("data-web");
+                inst.text(txt);
+
+                // visual device flag
+               /* var el = $('#deviceready');
+                var listening = el.find('.listening');
+                var received = el.find('.received');
+
+                listening.css('display', 'none');
+                received.css('display', 'block');
+                */
+
+                // launch app
+                fo.init();
+
+            });
+        })(jQuery, fo);
+    </script>
+    <script src="js/lib/jquery.mobile-1.3.1.min.js"></script>
+</body>
+</html>
+
