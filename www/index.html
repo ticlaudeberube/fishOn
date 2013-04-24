@@ -147,7 +147,7 @@
                 jqd.resolve();
             });
             // comment out dd in order to use solutions in browser as deviceReady event is not used in browser environment
-            $.when(dd, jqd).done(function () {
+            $.when(/*dd,*/ jqd).done(function () {
                 var isDevice = true;
                 // manage file upload and message for web browser
                 if (!navigator.camera) {

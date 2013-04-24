@@ -130,9 +130,6 @@ fo = {
                     edit.find('#editComment').val(spot.comment);
                     edit.find('#edituuid').val(spot.uuid);
                 });
-
-                e.preventDefault();
-                e.stopImmediatePropagation()
             });
 
             list.on('click', '.upload', function (e) {
@@ -152,27 +149,27 @@ fo = {
     unflagAzure: function (uuid) {
         var req = fo.db.get('spot', uuid);
         req.done(function (spot) {
-            spot.isCloud = false; // will unset Azure flag in local DB
-            fo.db.put('spot', spot, uuid);
-            fo.getLocalSpots();
+            if (typeof spot !== "undefined") {
+                spot.isCloud = false; // will unset Azure flag in local DB
+                fo.db.put('spot', spot, uuid);
+                fo.getLocalSpots();
+            }
         });
     },
     saveSpotToAzure: function (uuid) {
         var req = fo.db.get('spot', uuid);
         req.done(function (spot) {
+            if (typeof spot !== "undefined") {
+                // set cloud flag
+                spot.isCloud = true;
 
-            // set cloud flag
-            // if (spot.isCloud) return;
-            spot.isCloud = true;
+                var client = fo.client,
+                             spotsTable = client.getTable('spots');
+                spotsTable.insert(spot);
 
-            var client = fo.client,
-                         spotsTable = client.getTable('spots');
-            spotsTable.insert(spot);
-
-            // flag isCloud to prevent uploading again
-
-            fo.db.put('spot', spot, uuid);
-            fo.getLocalSpots();
+                fo.db.put('spot', spot, uuid);
+                fo.getLocalSpots();
+            }
         });
         this.hideLoading();
     },
@@ -180,7 +177,6 @@ fo = {
     deleteAzureSpot: function (azureid, uuid, el) {
 
         this.loading("Deleting Cloud item");
-        // need to sync isCLoud= true || local data here
 
         var client = fo.client,
                      spotsTable = client.getTable('spots');
@@ -401,12 +397,6 @@ $(document).on("appInit", function () {
             spot.location = loc;
             spot.comment = cmt;
             fo.db.put('spot', spot, uuid);
-
-            /*
-            if (spot.isCloud) { // to debug
-                fo.saveSpotToAzure(spot);
-            }
-            */
         });
         req.then(function (spot) {
             fo.getLocalSpots(); // My Spots list update
